@@ -1,21 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:outlineSpotShadowColor="@color/bggrey"
     android:background="@color/bggrey"
-    tools:context=".MainActivity"
-    >
+    android:outlineSpotShadowColor="@color/bggrey"
+    tools:context=".MainActivity">
 
-<androidx.recyclerview.widget.RecyclerView
-    android:id="@+id/homePageRecyclerView"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    app:spanCount="2"
-    app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
-    tools:itemCount="6"
-    tools:listitem="@layout/home_page_item"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/homePageRecyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+        app:spanCount="2"
+        tools:itemCount="6"
+        tools:listitem="@layout/home_page_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

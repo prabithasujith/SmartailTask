@@ -35,7 +35,7 @@ class DocumentViewModel : ViewModel() {
 
     //saving the bitmap temporarily in the local variable
     fun saveBitmap(capturedBitmap: Bitmap) {
-        originalbitmap= capturedBitmap
+        originalbitmap=capturedBitmap.copy(capturedBitmap.config,true)
         _bitmap.postValue(capturedBitmap)
     }
 
