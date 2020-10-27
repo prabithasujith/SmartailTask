@@ -10,54 +10,76 @@
     <ImageView
         android:id="@+id/iv_captured"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="400dp"
         android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/bg_video" />
+        app:srcCompat="@drawable/bg_video"
+        android:contentDescription="captured image" />
 
-    <Button
-        android:id="@+id/bt_removeShadow"
+    <LinearLayout
+        android:id="@+id/llayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/rectangle"
-        android:text="Remove Shadow"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/iv_captured"
-        app:layout_constraintVertical_bias="0.207" />
+        app:layout_constraintVertical_bias="0.207">
 
-    <Button
-        android:id="@+id/button2"
+        <Button
+            android:id="@+id/bt_removeShadow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:background="@android:color/transparent"
+            android:text="@string/remove_shadow"
+
+            />
+    </LinearLayout>
+
+    <RelativeLayout
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="40dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape"
-        android:text="Cancel"
-        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_removeShadow"
-        app:layout_constraintVertical_bias="0.516" />
+        app:layout_constraintTop_toBottomOf="@+id/llayout"
+        app:layout_constraintVertical_bias="0.516">
 
-    <Button
-        android:id="@+id/button3"
+        <Button
+            android:id="@+id/bt_done"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/stat_sys_download_done"
+            />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="40dp"
         android:layout_marginBottom="16dp"
         android:background="@drawable/shape"
-        android:text="Okay"
-        android:textSize="8sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bt_removeShadow"
-        app:layout_constraintVertical_bias="0.49" />
+        app:layout_constraintTop_toBottomOf="@+id/llayout"
+        app:layout_constraintVertical_bias="0.49">
 
+        <Button
+            android:id="@+id/bt_cancel"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:background="@android:drawable/ic_menu_close_clear_cancel"
+             />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

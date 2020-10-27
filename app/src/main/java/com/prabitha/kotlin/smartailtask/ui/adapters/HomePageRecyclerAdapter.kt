@@ -10,6 +10,8 @@ import com.prabitha.kotlin.smartailtask.models.HomeMenuModel
 import com.prabitha.kotlin.smartailtask.ui.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.home_page_item.view.*
 
+
+// adapter for the home page menu list
 class HomePageRecyclerAdapter(private val items: ArrayList<HomeMenuModel>, private val viewModel: HomeViewModel) : RecyclerView.Adapter<HomePageRecyclerAdapter.HomePageItemHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): HomePageItemHolder {
         val view =

@@ -14,7 +14,10 @@ import kotlinx.android.synthetic.main.activiy_home.*
 
 class VideosActivity : AppCompatActivity() {
 
-    lateinit var videosViewModel: VideosViewModel
+    /*
+    * Activity to list all the videos
+    * */
+    private lateinit var videosViewModel: VideosViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activiy_home)
@@ -24,6 +27,7 @@ class VideosActivity : AppCompatActivity() {
         showVideos()
     }
 
+    //show videos
     private fun showVideos() {
         homePageRecyclerView.adapter =
             VideosRecyclerViewAdapter(videosViewModel.videos as ArrayList<VideoModel>)

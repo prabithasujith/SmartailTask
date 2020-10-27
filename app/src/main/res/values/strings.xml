@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DeepGrade</string>
+    <string name="video_thumbnail">Video Thumbnail</string>
+    <string name="menu_item">menu item</string>
+    <string name="notifications">notifications</string>
+    <string name="all_documents">All Documents</string>
+    <string name="remove_shadow">Remove Shadow</string>
 </resources>

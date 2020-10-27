@@ -12,11 +12,15 @@ import com.prabitha.kotlin.smartailtask.ui.adapters.HomePageRecyclerAdapter
 import com.prabitha.kotlin.smartailtask.ui.viewmodels.HomeViewModel
 import kotlinx.android.synthetic.main.activiy_home.*
 
+/*
+* Activity launched on opening the app
+* It shows all the menus on the home page
+* */
 
 class MainActivity : AppCompatActivity() {
 
 
-    lateinit var homeMenuViewModel: HomeViewModel
+    private lateinit var homeMenuViewModel: HomeViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activiy_home)
@@ -25,10 +29,11 @@ class MainActivity : AppCompatActivity() {
         homeMenuViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         showMenus()
-        setListeners()
+        setObservers()
 
     }
 
+    //show all the menus
     private fun showMenus() {
         homePageRecyclerView.adapter = HomePageRecyclerAdapter(
             homeMenuViewModel.menus as ArrayList<HomeMenuModel>,
@@ -37,17 +42,17 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setListeners() {
+    //set listene
+    private fun setObservers() {
         homeMenuViewModel.navigateToNextScreen.observe(this, {
             if (it) {
-                var intent: Intent
                 //start the video activity on click of all videos
-                if (homeMenuViewModel.screenId == 0) {
-                    intent = Intent(this, VideosActivity::class.java)
+                val intent: Intent = if (homeMenuViewModel.screenId == 0) {
+                    Intent(this, VideosActivity::class.java)
 
                 } else {
                     //start document activity
-                    intent = Intent(this, DocumentActivity::class.java)
+                    Intent(this, DocumentActivity::class.java)
 
                 }
                 startActivity(intent)

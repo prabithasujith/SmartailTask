@@ -6,76 +6,98 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.Toast
-import androidx.appcompat.app.ActionBar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.prabitha.kotlin.smartailtask.R
 import com.prabitha.kotlin.smartailtask.ui.viewmodels.DocumentViewModel
-import com.prabitha.kotlin.smartailtask.ui.viewmodels.VideosViewModel
 import kotlinx.android.synthetic.main.activity_document.*
 import org.opencv.android.OpenCVLoader
-import org.opencv.android.Utils
-import org.opencv.core.Mat
-import org.opencv.imgproc.Imgproc
 
+
+/*
+* Activity to scan pictures using camera and remove shadows
+* */
 class DocumentActivity : AppCompatActivity() {
 
-    lateinit var documnetViewModel:DocumentViewModel
+    private lateinit var documentViewModel: DocumentViewModel
+
     companion object {
-        val REQUEST_IMAGE_CAPTURE = 1
+        const val REQUEST_IMAGE_CAPTURE = 1
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_document)
-        documnetViewModel = ViewModelProvider(this).get(DocumentViewModel::class.java)
+        supportActionBar?.hide()
+        documentViewModel = ViewModelProvider(this).get(DocumentViewModel::class.java)
+
+        //imitialize OpenCv Library
         if (OpenCVLoader.initDebug()) {
-                Toast.makeText(applicationContext, " success", Toast.LENGTH_LONG).show()
-            } else {
-                Log.d("log ", " Failure")
-            }
-        documnetViewModel.startCameraCheck.observe(this,{
-           if(it)
-           {
-               val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
-               try {
-                   startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
-               } catch (e: ActivityNotFoundException) {
-                   Log.d("error", e.toString())
-                   documnetViewModel.stopCamera()
-               }
-           }
-
-        })
-
-        documnetViewModel.bitmap.observe(this,{
-            if(it!=null)
-            iv_captured.setImageBitmap(it)
-        })
-
-        bt_removeShadow.setOnClickListener {
-            documnetViewModel.removeShadow()
+            Log.d("log ", " success")
+        } else {
+            Log.d("log ", " Failure")
         }
+
+        setObservers()
+        setListeners()
 
     }
 
+    //setting listeners for all the buttons
+    private fun setListeners() {
+        bt_removeShadow.setOnClickListener {
+            documentViewModel.removeShadow()
+        }
 
+        bt_cancel.setOnClickListener {
+            documentViewModel.cancelShadowRemoval()
+        }
+
+        bt_done.setOnClickListener{
+            this.finish()
+        }
+    }
+
+    //setting observers for live data
+    private fun setObservers() {
+        documentViewModel.startCameraCheck.observe(this, {
+            if (it) {
+                val takePictureIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+                try {
+                    startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE)
+                } catch (e: ActivityNotFoundException) {
+                    Log.d("error", e.toString())
+                    documentViewModel.stopCamera()
+                }
+            }
+
+        })
+
+        documentViewModel.bitmap.observe(this, {
+            if (it != null)
+                iv_captured.setImageBitmap(it)
+
+        })
+
+
+    }
+
+    // handle the captured image from camera
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
 
-            try{
+            try {
                 val imageBitmap = data?.extras?.get("data") as Bitmap
-                documnetViewModel.saveBitmap(imageBitmap)
-                documnetViewModel.stopCamera()
-            }
-            catch (e:Exception)
-            {
-                documnetViewModel.stopCamera()
+                documentViewModel.saveBitmap(imageBitmap)
+                documentViewModel.stopCamera()
+            } catch (e: Exception) {
+                documentViewModel.stopCamera()
             }
 
+        } else {
+            this.finish()
         }
     }
 }

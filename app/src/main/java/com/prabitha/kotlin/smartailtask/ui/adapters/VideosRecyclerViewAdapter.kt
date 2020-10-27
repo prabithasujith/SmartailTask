@@ -12,6 +12,9 @@ import kotlinx.android.synthetic.main.home_page_item.view.video_thumbnail
 import kotlinx.android.synthetic.main.home_page_item.view.video_title
 import kotlinx.android.synthetic.main.video_list_item.view.*
 
+/*
+* adapter for the videos page list
+* */
 class VideosRecyclerViewAdapter(private val items: ArrayList<VideoModel>) :
     RecyclerView.Adapter<VideosRecyclerViewAdapter.VideosItemViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VideosItemViewHolder {
