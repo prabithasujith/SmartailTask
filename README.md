@@ -1,6 +1,6 @@
 # SmartailTask
  
-This application is used to scan a document and remove the shadow using openCV.
+This is a native android (Kotlin) application used to scan a document and remove the shadow using openCV.
 
 # MVVM- Livedata
  This is an application implementing MVVM architecture
